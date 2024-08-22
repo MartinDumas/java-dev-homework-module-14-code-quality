@@ -14,24 +14,12 @@ public class App {
     private static final char[] board = new char[TOTAL_BOXES];
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
-        resetBoard();
-        System.out.println("Enter box number to select. Enjoy!\n");
 
-        while (true) {
-            printBoard();
-            playerTurn();
-            if (isGameOver()) break;
-            computerTurn();
-            if (isGameOver()) break;
-        }
-    }
-
-    private static void resetBoard() {
+    public void resetBoard() {
         Arrays.fill(board, EMPTY_BOX);
     }
 
-    private static void printBoard() {
+    public void printBoard() {
         System.out.println("\n\n " + board[0] + " | " + board[1] + " | " + board[2] + " ");
         System.out.println("-----------");
         System.out.println(" " + board[3] + " | " + board[4] + " | " + board[5] + " ");
@@ -39,7 +27,7 @@ public class App {
         System.out.println(" " + board[6] + " | " + board[7] + " | " + board[8] + " \n");
     }
 
-    private static void playerTurn() {
+    public void playerTurn() {
         while (true) {
             System.out.print("Your move (1-9): ");
             byte playerMove = scanner.nextByte();
@@ -56,7 +44,7 @@ public class App {
         }
     }
 
-    private static void computerTurn() {
+   public  void computerTurn() {
         while (true) {
             int computerMove = (int) (Math.random() * TOTAL_BOXES);
             if (board[computerMove] == EMPTY_BOX) {
@@ -66,7 +54,7 @@ public class App {
         }
     }
 
-    private static boolean isGameOver() {
+    public boolean isGameOver() {
         byte winner = checkWinner();
         if (winner == PLAYER_X_WINS) {
             System.out.println("You won the game!\nThanks for playing!");
@@ -81,7 +69,7 @@ public class App {
         return false;
     }
 
-    private static byte checkWinner() {
+    private  byte checkWinner() {
         if (isWinningCombination(PLAYER_X)) {
             return PLAYER_X_WINS;
         } else if (isWinningCombination(PLAYER_O)) {
@@ -92,7 +80,7 @@ public class App {
         return NO_WINNER;
     }
 
-    private static boolean isWinningCombination(char player) {
+    private  boolean isWinningCombination(char player) {
         return (board[0] == player && board[1] == player && board[2] == player) ||
                 (board[3] == player && board[4] == player && board[5] == player) ||
                 (board[6] == player && board[7] == player && board[8] == player) ||
@@ -103,7 +91,7 @@ public class App {
                 (board[2] == player && board[4] == player && board[6] == player);
     }
 
-    private static boolean isBoardFull() {
+    private  boolean isBoardFull() {
         for (char box : board) {
             if (box == EMPTY_BOX) {
                 return false;
